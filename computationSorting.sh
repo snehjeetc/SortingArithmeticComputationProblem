@@ -40,7 +40,7 @@ compute(){
     storeInDictionary $res4
 }
 
-showInDescendingOrder(){
+showInOrder(){
     tempArray=()
     for index in ${!array[@]}
     do
@@ -62,10 +62,23 @@ showInDescendingOrder(){
         tempArray[$i]=${tempArray[$index]}
         tempArray[$index]=$temp
     done
-    for i in ${!tempArray[@]}
-    do
-        echo ${tempArray[$i]}
-    done
+    case $1 in
+        -1) #prints in descending order
+            for i in ${!tempArray[@]}
+            do
+                echo ${tempArray[$i]}
+            done
+            ;;
+        1)  #prints in ascending order
+            for((i=$((${#tempArray[@]}-1)); i>=0; i--))
+            do
+                echo ${tempArray[$i]}
+            done
+            ;;
+        *)
+            echo "Wrong Argument"
+            ;;
+    esac
     unset tempArray
 }
 
@@ -74,4 +87,5 @@ echo "This problem computes different arithmetic expressions and Sorts the resul
 TakeInput
 compute
 storeInArray
-showInDescendingOrder
+showInOrder -1
+showInOrder 1
