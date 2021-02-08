@@ -40,8 +40,38 @@ compute(){
     storeInDictionary $res4
 }
 
+showInDescendingOrder(){
+    tempArray=()
+    for index in ${!array[@]}
+    do
+        tempArray[$index]=${array[$index]}
+    done
+    for((i=0; i<${#tempArray[@]}; i++))
+    do
+        index=$i
+        max=${tempArray[$i]}
+        for((j=$(($i+1)); j<$((${#tempArray[@]}-1)); j++))
+        do
+            if [ $max -lt ${tempArray[$j]} ]
+            then
+                max=${tempArray[$j]}
+                index=$j
+            fi
+        done
+        temp=${tempArray[$i]}
+        tempArray[$i]=${tempArray[$index]}
+        tempArray[$index]=$temp
+    done
+    for i in ${!tempArray[@]}
+    do
+        echo ${tempArray[$i]}
+    done
+    unset tempArray
+}
+
 
 echo "This problem computes different arithmetic expressions and Sorts the results"
 TakeInput
 compute
 storeInArray
+showInDescendingOrder
