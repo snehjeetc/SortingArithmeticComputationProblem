@@ -6,6 +6,7 @@ declare -i c=0
 declare -i res1=0
 declare -i res2=0
 declare -i res3=0
+declare -i res4=0
 
 TakeInput(){
     read -p "Enter three numbers : " a b c
@@ -21,6 +22,7 @@ compute(){
         exit -1
     fi
     res3=$(($c+($a/$b)))
+    res4=$(($a%$b + $c))
 }
 
 
