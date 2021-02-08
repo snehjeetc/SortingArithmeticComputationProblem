@@ -4,11 +4,19 @@ declare -i a=0
 declare -i b=0
 declare -i c=0
 declare -A results
+declare -a array
 declare -i key=0
 
 storeInDictionary(){
     results[$key]=$1
     ((key++))
+}
+
+storeInArray(){
+    for keys in ${!results[@]}
+    do 
+       array[$keys]=${results[$keys]} 
+    done
 }
 
 TakeInput(){
@@ -36,3 +44,4 @@ compute(){
 echo "This problem computes different arithmetic expressions and Sorts the results"
 TakeInput
 compute
+storeInArray
